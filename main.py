@@ -160,7 +160,7 @@ if __name__ ==  "__main__":
     # 要修改的步数，直接输入想要修改的步数值，留空为随机步数
     #可自定义指定一个数值，或者生成随机数
     #step = "17760"
-    step = str(random.randint(20100,20120))
+    step = str(random.randint(8120,11120))
     user_list = user.split('#')
     passwd_list = passwd.split('#')
     setp_array = step.split('-')
