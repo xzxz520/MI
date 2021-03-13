@@ -146,15 +146,15 @@ def push_wx(sckey, desp=""):
 
 if __name__ ==  "__main__":
     # ServerChan
-    sckey =  "SCU63804T973ab46ed612b4456dd74f63a55b6ee15d9d8d807cb10"
+    sckey = input()
     if str(sckey) == '0':
         sckey = ''
-    # 用户名（格式为 13800138000）
-    user ="17876767895"
+    # 用户名（格式为 13800138000，11位手机号码）
+    user = input()
     # 登录密码
-    passwd = "FZYfzy5201314!"
+    passwd = input()
     # 要修改的步数，直接输入想要修改的步数值，留空为随机步数
-    step = "16000-19000"
+    step = input()
 
     user_list = user.split('#')
     passwd_list = passwd.split('#')
@@ -172,4 +172,5 @@ if __name__ ==  "__main__":
     else:
         print('用户名和密码数量不对')
 os.system("pause")
+  #调用os模块暂停代码执行，解决打开cmd窗口一闪而过的问题
     
