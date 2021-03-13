@@ -5,10 +5,13 @@
 
 import requests,time,re,json,random
 import os
+# 导入 random(随机数) 模块
+import random
 
 now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 headers = {
-        'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'
+    #'User-Agent': 'Mozilla/5.0 (Linux; Android 10; Redmi K20 Pro Build/QKQ1.190825.002; wv)'
+    'User-Agent': 'Dalvik/2.1.0 (Linux; U; Android 9; MI 6 MIUI/20.6.18)'
         }
 
  
@@ -72,11 +75,12 @@ def main(user, passwd, step):
     
     if step == '':
         print ("已设置为随机步数（10000-19999）")
+        # 生成 10000~ 19999之间的随机整数
         step = str(random.randint(10000,19999))
     login_token = 0
     login_token,userid = login(user,password)
     if login_token == 0:
-        print("登陆失败！")
+        print("登录失败！")
         return "登录失败!"
  
     t = get_time()
@@ -102,7 +106,7 @@ def main(user, passwd, step):
     
     response = requests.post(url, data=data, headers=head).json()
     #print(response)
-    result = f"{user[:4]}****{user[-4:]}: [{now}] 修改步数（{step}）"+ response['message']
+    result = f"{user[:4]}****{user[-4:]}：    [{now}] \n\n步数  {step}      修改状态："+ response['message']
     print(result)
     return result
   
@@ -132,7 +136,7 @@ def push_wx(sckey, desp=""):
     else:
         server_url = f"https://sc.ftqq.com/{sckey}.send"
         params = {
-            "text": '小米运动 步数修改 ',
+            "text": '小米运动 步数修改',
             "desp": desp
         }
  
@@ -140,22 +144,23 @@ def push_wx(sckey, desp=""):
         json_data = response.json()
  
         if json_data['errno'] == 0:
-            print(f"[{now}] 推送成功。")
+            print(f"\n\n[{now}] Sever推送成功。")
         else:
-            print(f"[{now}] 推送失败：{json_data['errno']}({json_data['errmsg']})")
+            print(f"\n\n[{now}] 推送失败：{json_data['errno']}({json_data['errmsg']})")
 
 if __name__ ==  "__main__":
     # ServerChan
-    sckey = input()
+    sckey =  "SCU63804T973ab46ed612b4456dd74f63a55b6ee15d9d8d807cb10"
     if str(sckey) == '0':
         sckey = ''
-    # 用户名（格式为 13800138000，11位手机号码）
-    user = input()
+    # 用户名（格式为 13800138000）
+    user ="17876767895"
     # 登录密码
-    passwd = input()
+    passwd = "fzyfzy1314"
     # 要修改的步数，直接输入想要修改的步数值，留空为随机步数
-    step = input()
-
+    #可自定义指定一个数值，或者生成随机数
+    #step = "17760"
+    step = str(random.randint(20100,20120))
     user_list = user.split('#')
     passwd_list = passwd.split('#')
     setp_array = step.split('-')
@@ -172,5 +177,4 @@ if __name__ ==  "__main__":
     else:
         print('用户名和密码数量不对')
 os.system("pause")
-  #调用os模块暂停代码执行，解决打开cmd窗口一闪而过的问题
     
