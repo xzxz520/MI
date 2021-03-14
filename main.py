@@ -2,11 +2,8 @@
 # python >=3.8
 
   
-
-import requests,time,re,json,random
-import os
 # 导入 random(随机数) 模块
-import random
+import requests,time,re,json,random
 
 now = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 headers = {
@@ -176,5 +173,4 @@ if __name__ ==  "__main__":
         push_wx(sckey, push)
     else:
         print('用户名和密码数量不对')
-os.system("pause")
-    
+   
